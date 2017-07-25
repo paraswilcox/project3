@@ -4,36 +4,25 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Instagram Clone</title>
+	<title>Social Kids</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'app1/index.css' %}"/>
 </head>
 <body>
-	<div class="main">
-		<h1> Instagram Clone</h1>
-		<h3>Sign Up</h3>
-	</div>
-	<div>
-		<form method="post">
-		{% csrf_token %}    
-			<div>
-				<label for="username">Username: </label>
-				<input id="username" type="text" name="username" value={{ username }}>
-			</div>
-			<div>
-				<label for="name">Name: </label>
-				<input id="name" type="text" name="name" value={{ name }}>
-			</div>
-			<div>
-				<label for="email">Email: </label>
-				<input id="email" type="text" name="email" value={{ email }}>
-			</div>
-			<div>
-				<label for="password">Password: </label>
-				<input id="password" type="password" name="password" value={{ password }}>
-			</div>
-			<input type="submit" value="Sign Up">
-		</form>
-	</div><br><br>
-   	<div><h3>Already a user?</h3><a href="login/">Login</a> </div>
+	<div class="container">
+		<h1 style="text-align: center;">Social Kids</h1>
+		<h2 style="text-align: center;">Sign Up</h2>
+		<div class="section">
+			<form method="post" id="Sign_Up">
+			{% csrf_token %}    
+				<input id="username" type="text" name="username" placeholder="username" value={{ username }}><br>
+				<input id="name" type="text" name="name" placeholder="Your name" value={{ name }}><br>
+				<input id="email" type="text" name="email" placeholder="xyz@example.com" value={{ email }}><br>
+				<input id="password" type="password" name="password" placeholder="password" value={{ password }}><br>
+				<input type="submit" value="Sign Up" class="button"><br>
+			</form>
+			<p>Already a user?</p>
+			<a href="login/" class="button">Log in</a>
+   		</div>
+   	</div>
 </body>
 </html>

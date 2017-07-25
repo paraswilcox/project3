@@ -1,3 +1,70 @@
 body {
-	background-color: red;
+	margin: 0px;
+	font-family: "verdana";
+	color:black;
+}
+h1,h2 {
+	color: SkyBlue;
+	font-family: 'Rancho', cursive;
+}
+.container {
+	background: url("images/background.jpg");
+	width: 100%;
+	height: 800px;
+	background-size: cover;
+	position: absolute;
+	margin: auto;
+}
+.section {
+	background-color:DarkSlateBlue;
+	opacity: 0.3;
+	background-size: cover;
+	position: relative;
+	width:25%;
+	height: 400px;
+	text-align: center;
+	margin: auto;
+	border-radius: 20px;
+	min-width: 200px;
+}
+.section:hover {
+	opacity: 1;
+}
+#Sign_Up{
+	position: relative;
+	margin: auto;
+	height: 70%;
+	border-radius: 20px;
+}
+input {
+	position: relative;
+	margin: 10px;
+	padding: 10px;
+}
+input[type=text],[type=password]{
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+	width: 40%;
+}
+input[type=text]:hover,[type=password]:hover {
+	background-color: Gainsboro;
+}
+.button {
+	text-decoration: none;
+	color: white;
+	border: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	background-color: rgba(0,0,0,0.5);
+	padding: 5px;
+}
+.button:hover {
+	background-color: rgba(0,0,0,1);
 }
