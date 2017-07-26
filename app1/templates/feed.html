@@ -1,50 +1,53 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'app1/feed.css' %}">
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'app1/feed.css' %}"/>
 </head>
 <body>
     <form method="post" action="/post/">
         {% csrf_token %}
-        <input type="submit" class="btn-default btn" value="Create Post">
+        <input type="submit" value="Create Post" class="button">
     </form>
-    {% for post in posts %}
-        <h3> Posted by: {{ post.user.username }} </h3>
-        <p>[{{ post.created_on }}]</p>
-        <img style="display:inline-block; width:350px; height:300px;"src="{{ post.image_url }}" /><br>
-        <span  style="display:inline-block;">{{ post.caption }}</span><br/><br/>
-        <div style="display:inline-block">
-            {{ post.like_count }} likes this
-        </div>
-        <div style="display:inline-block">
-            <form method="POST" action="/like/">
-                {% csrf_token %}
-                    <input type="hidden" name="post" value="{{ post.id }}" />
-                {% if post.has_liked %}
-                    <input type="submit" class="btn btn-default" value="Unlike">
-                {% else %}
-                    <input type="submit" class="btn btn-default" value="Like">
-                {% endif %}
-            </form>
-        </div>
-        <div>
-            <form method="POST" action="/comment/">
-                {% csrf_token %}
-                    <input type="hidden" name="post" value="{{ post.id }}" />
-                    <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
-                    {{ comment_text }}
-                    <input type="submit" class="btn-default btn" value="Comment">
-            </form>
-        </div>
-        <div>
-            {% for comment in post.comments %}
-                <p><b>{{ comment.user.username }} [{{ comment.created_on }}]:</b> {{ comment.comment_text }}</p>
-            {% endfor %}
-        </div>
-
-    {% endfor %}
+    <div class="container">
+        {% for post in posts %}
+            <h4> Posted by: {{ post.user.username }} </h4>
+            <p>[{{ post.created_on }}]</p>
+            <div class="imagearea">
+                <div class="img_capt">
+                    <img style="width:350px; height:300px;"src="{{ post.image_url }}" />
+                    <div class="captionarea">
+                        {{ post.caption }}
+                    </div>
+                </div>
+                <div class="likearea">
+                    {{ post.like_count }} likes this
+                    <form method="POST" action="/like/">
+                        {% csrf_token %}
+                            <input type="hidden" name="post" value="{{ post.id }}" />
+                        {% if post.has_liked %}
+                            <input type="submit" value="Unlike" class="button">
+                        {% else %}
+                            <input type="submit" value="Like" class="button">
+                        {% endif %}
+                    </form>                
+                </div>
+                <div class="commentarea">
+                    <form method="POST" action="/comment/">
+                        {% csrf_token %}
+                            <input type="hidden" name="post" value="{{ post.id }}" />
+                            <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
+                            {{ comment_text }}
+                            <input type="submit" value="Comment" class="button">
+                    </form>
+                    {% for comment in post.comments %}
+                        <p><b><span class="user">{{ comment.user.username }}</span><br> <span class="dated">[{{ comment.created_on }}]:</b></span><span class="comm">{{ comment.comment_text }}</span></p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

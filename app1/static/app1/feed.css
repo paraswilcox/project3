@@ -1,0 +1,71 @@
+body {
+	font-family: "verdana"
+}
+.container {
+	width: 360px;
+	max-width: 360px;
+	min-width: 360px;
+	height: 100%;
+	margin: auto;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 5px;
+	color:  #607d8b;
+}
+.imagearea {
+	position: relative;
+	margin: auto;
+	padding: 5px;
+	color: #e0e0e0;
+}
+.captionarea {
+	position: relative;
+	padding:5px;
+}
+.likearea {
+	position: relative;
+	background-color: #651fff;
+	width: inherit;
+	margin: auto;
+	padding: 5px;
+	color: #e0e0e0;
+}
+.commentarea {
+	position: relative;
+	background-color: #7c4dff;
+	width: inherit;
+	margin: auto;
+	padding: 5px;
+	color: #e0e0e0;
+}
+.button {
+	text-decoration: none;
+	color: white;
+	border: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	background-color: rgba(0,0,0,0.5);
+	padding: 5px;
+}
+.button:hover {
+	background-color: rgba(0,0,0,1);
+}
+.img_capt {
+	background-color: #311b92;
+}
+input[value=Like] ,[value=Comment]{
+	background-color:  #0d47a1;
+}
+input[value=Unlike] {
+	background-color:  #e91e63;
+}
+.user {
+	color:black;
+}
+.comm {
+	color: #fafafa;
+}
+.dated {
+	color: #fff176;
+}
