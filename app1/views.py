@@ -137,3 +137,10 @@ def check_validation(request):
 				return session.user
 	else:
 		return None
+def log_out(request):
+	if request.COOKIES.get('session_token'):
+		response = redirect("/feed")
+		response.set_cookie(key='session_token', value=None)
+		return response
+	else:
+		return None

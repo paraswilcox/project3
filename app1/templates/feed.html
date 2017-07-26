@@ -11,6 +11,10 @@
         {% csrf_token %}
         <input type="submit" value="Create Post" class="button">
     </form>
+    <form method="post" action="/log_out/">
+        {% csrf_token %}
+        <input type="submit" value="Log Out" class="button">
+    </form>  
     <div class="container">
         {% for post in posts %}
             <div class="header">
