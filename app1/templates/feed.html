@@ -13,8 +13,9 @@
     </form>
     <div class="container">
         {% for post in posts %}
-            <h4> Posted by: {{ post.user.username }} </h4>
-            <p>[{{ post.created_on }}]</p>
+            <div class="header">
+                <h4> Posted by: {{ post.user.username }} </h4>
+                <p>[{{ post.created_on }}]</p></div>
             <div class="imagearea">
                 <div class="img_capt">
                     <img style="width:350px; height:300px;"src="{{ post.image_url }}" />
