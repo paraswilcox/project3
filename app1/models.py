@@ -1,11 +1,10 @@
 from django.db import models
 import uuid
-from django.core.validators import validate_email
 
 class UserModel(models.Model):
-	email = models.EmailField(max_length=254, blank=True, unique=True, validators=[validate_email])
-	name = models.CharField(max_length=120, blank=True)
-	username = models.CharField(max_length=120, unique=True, blank=True)
+	email = models.EmailField(max_length=254, blank=False, unique=True)
+	name = models.CharField(max_length=120, blank=False)
+	username = models.CharField(max_length=120, blank=False)
 	password = models.CharField(max_length=40)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)

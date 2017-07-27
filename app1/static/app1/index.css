@@ -20,8 +20,8 @@ h1,h2 {
 	opacity: 0.3;
 	background-size: cover;
 	position: relative;
-	width:25%;
-	height: 400px;
+	width:50%;
+	height: 600px;
 	text-align: center;
 	margin: auto;
 	border-radius: 20px;
@@ -67,4 +67,7 @@ input[type=text]:hover,[type=password]:hover {
 }
 .button:hover {
 	background-color: rgba(0,0,0,1);
+}
+span {
+	color: white;
 }

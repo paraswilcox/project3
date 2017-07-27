@@ -14,25 +14,15 @@
 		<div class="section">
 			<form method="post" id="Sign_Up">
 			{% csrf_token %}    
-				<input id="username" type="text" name="username" placeholder="username" value={{ username }}><br>
-				<input id="name" type="text" name="name" placeholder="Your name" value={{ name }}><br>
-				<input id="email" type="text" name="email" placeholder="xyz@example.com" value={{ email }}><br>
+				<input id="username" type="text" name="username" placeholder="username" value={{ username }}><br><span style="float: right;">{{ form.username.errors }}</span>
+				<input id="name" type="text" name="name" placeholder="Your name" value={{ name }}><br><span style="float: right;">{{ form.name.errors }}</span>
+				<input id="email" type="text" name="email" placeholder="xyz@example.com" value={{ email }}><br><span style="float: right;">{{ form.email.errors }}</span>
 				<input id="password" type="password" name="password" placeholder="password" value={{ password }}><br>
 				<input type="submit" value="Sign Up" class="button"><br>
 			</form>
 			<p>Already a user?</p>
 			<a href="login/" class="button">Log in</a>
    		</div>
-		{% if form.errors %}
-			<div style="color: red;float: right;">
-				<p>
-					Please correct the errors below
-				</p>
-			{{ form.username.errors }}
-			{{ form.name.errors }}
-			{{ form.email.errors }}
-			</div>
-		{% endif %}
    	</div>
 </body>
 </html>
