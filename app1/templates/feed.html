@@ -7,16 +7,16 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="post" action="/post/">
+    <form method="post" action="/post/" style="float: left;">
         {% csrf_token %}
         <input type="submit" value="Create Post" class="button">
     </form>
-    <form method="post" action="/log_out/">
+    <form method="post" action="/log_out/" style="float: right;">
         {% csrf_token %}
         <input type="submit" value="Log Out" class="button">
     </form>  
     <div class="container">
-        {% for post in posts %}
+        {% for post in posts reversed %}
             <div class="header">
                 <h4> Posted by: {{ post.user.username }} </h4>
                 <p>[{{ post.created_on }}]</p></div>
