@@ -14,7 +14,13 @@
     <form method="post" action="/log_out/" style="float: right;">
         {% csrf_token %}
         <input type="submit" value="Log Out" class="button">
-    </form>  
+    </form>
+    <div>
+    <form method="get" action="/search/">
+        <input type="text" name="q" placeholder="Show posts from">
+        <input type="submit" value="Search" class="button">
+    </form>
+    </div>
     <div class="container">
         {% for post in posts reversed %}
             <div class="header">
