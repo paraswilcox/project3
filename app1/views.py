@@ -23,7 +23,6 @@ def signup_view(request):
 			return redirect('login/')
 	else:
 		form = SignUpForm()
-
 	return render(request, 'index.html', {'form' : form})
 
 

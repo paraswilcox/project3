@@ -23,6 +23,16 @@
 			<p>Already a user?</p>
 			<a href="login/" class="button">Log in</a>
    		</div>
+		{% if form.errors %}
+			<div style="color: red;float: right;">
+				<p>
+					Please correct the errors below
+				</p>
+			{{ form.username.errors }}
+			{{ form.name.errors }}
+			{{ form.email.errors }}
+			</div>
+		{% endif %}
    	</div>
 </body>
 </html>

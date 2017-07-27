@@ -1,10 +1,11 @@
 from django.db import models
 import uuid
+from django.core.validators import validate_email
 
 class UserModel(models.Model):
-	email = models.EmailField()
-	name = models.CharField(max_length=120)
-	username = models.CharField(max_length=120)
+	email = models.EmailField(max_length=254, blank=True, unique=True, validators=[validate_email])
+	name = models.CharField(max_length=120, blank=True)
+	username = models.CharField(max_length=120, unique=True, blank=True)
 	password = models.CharField(max_length=40)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
@@ -49,3 +50,4 @@ class CommentModel(models.Model):
 	comment_text = models.CharField(max_length=555)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
+	
