@@ -12,5 +12,5 @@ urlpatterns = [
 	url(r'^$', signup_view),
 	url(r'^log_out/$', log_out),
 	url(r'^search/$',search),
-	url(r'^like_comm/$', like_comm)
+	url(r'^like_comm/$', like_comm),
 ]

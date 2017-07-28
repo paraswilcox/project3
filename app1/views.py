@@ -5,8 +5,9 @@ from .models import UserModel, SessionToken, PostModel, LikeModel, CommentModel,
 from django.contrib.auth.hashers import make_password, check_password
 from datetime import timedelta
 from django.utils import timezone
-from project3.settings import BASE_DIR
+from project3.settings import *
 from imgurpython import ImgurClient
+from django.core.mail import send_mail
 
 def signup_view(request):
 	if request.method == "POST":
@@ -19,6 +20,11 @@ def signup_view(request):
 			#saving data to DB
 			user = UserModel(name=name, password=make_password(password), email=email, username=username)
 			user.save()
+			subject = 'Welcome to Social Kids'
+			message = 'Thanks for joining Social Kids, the only place where kids can have fun online'
+			from_email = EMAIL_HOST_USER
+			to_email = [user.email]
+			send_mail(subject, message, from_email, to_email)
 			return render(request, 'success.html')
 			return redirect('login/')
 	else:
@@ -101,8 +107,20 @@ def like_view(request):
 			existing_like = LikeModel.objects.filter(post_id=post_id, user=user).first()
 			if not existing_like:
 				LikeModel.objects.create(post_id=post_id, user=user)
+				poster = PostModel.objects.filter(id=post_id).first()
+				subject = "Your photo was liked"
+				message = "Your photo was liked by" + user.username
+				from_email = EMAIL_HOST_USER
+				to_email = [poster.user.email]
+				send_mail(subject, message, from_email, to_email)
 			else:
 				existing_like.delete()
+				poster = PostModel.objects.filter(id=post_id).first()
+				subject = "Your photo was unliked"
+				message = "Your photo was unliked by" + user.username
+				from_email = EMAIL_HOST_USER
+				to_email = [poster.user.email]
+				send_mail(subject, message, from_email, to_email)
 			return redirect('/feed/')
 	else:
 		return redirect('/login/')
@@ -116,6 +134,12 @@ def comment_view(request):
 			comment_text = form.cleaned_data.get('comment_text')
 			comment = CommentModel.objects.create(user=user, post_id=post_id, comment_text=comment_text)
 			comment.save()
+			poster = PostModel.objects.filter(id=post_id).first()
+			subject = "Comment on your photo"
+			message = str(user.username) + "commented on your photo" + comment_text
+			from_email = EMAIL_HOST_USER
+			to_email = [poster.user.email]
+			send_mail(subject, message, from_email, to_email)
 			return redirect('/feed/')
 		else:
 			return redirect('/feed/')
