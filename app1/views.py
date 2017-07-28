@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, LoginForm, PostForm, LikeForm, CommentForm
-from .models import UserModel, SessionToken, PostModel, LikeModel, CommentModel
+from .forms import SignUpForm, LoginForm, PostForm, LikeForm, CommentForm, LikeCommForm
+from .models import UserModel, SessionToken, PostModel, LikeModel, CommentModel, LikeComm
 from django.contrib.auth.hashers import make_password, check_password
 from datetime import timedelta
 from django.utils import timezone
@@ -81,15 +81,12 @@ def post_view(request):
 def feed_view(request):
 	user = check_validation(request)
 	if user:
-
 		posts = PostModel.objects.all().order_by('created_on')
-
 		
 		for post in posts:
 			existing_like = LikeModel.objects.filter(post_id=post.id, user=user).first()
 			if existing_like:
 				post.has_liked = True
-
 		return render(request, 'feed.html', {'posts': posts})
 	else:
 
@@ -149,3 +146,18 @@ def search(request):
 		posts = PostModel.objects.filter(user__username__icontains=q)
 		return render(request, "feed.html", {"posts": posts, "query": q})
 	return render(request, "feed.html")
+
+def like_comm(request):
+	user = check_validation(request)
+	if user and request.method == 'POST':
+		form = LikeCommForm(request.POST)
+		if form.is_valid():
+			comment_id = form.cleaned_data.get('comment').id
+			existing_like = LikeComm.objects.filter(comment_id=comment_id, user=user).first()
+			if not existing_like:
+				LikeComm.objects.create(comment_id=comment_id, user=user,)
+			else:
+				existing_like.delete()
+			return redirect('/feed/')
+	else:
+		return redirect('/login/')
