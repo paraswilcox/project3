@@ -10,7 +10,7 @@
             <h1>Login</h1>
             <form class="login" method="POST" id="log_in">
                 {% csrf_token %}
-                <input type="text" placeholder="Username" name="username" value={{username}}><br>
+                <input type="text" placeholder="Username" name="username" value={{username}}><br><span style="float: right;">{{ form.username.errors }}</span>
                 <input type="password" placeholder="Password" name="password" value={{password}}><br>
                 <input type="submit" value="Log in" class="button">
             </form>
