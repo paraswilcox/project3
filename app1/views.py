@@ -24,7 +24,7 @@ def signup_view(request):
 			message = 'Thanks for joining Social Kids, the only place where kids can have fun online'
 			from_email = EMAIL_HOST_USER
 			to_email = [user.email]
-			send_mail(subject, message, from_email, to_email)
+			send_mail(subject, message, from_email, to_email, fail_silently=True)
 			return render(request, 'success.html')
 			return redirect('login/')
 	else:
@@ -109,18 +109,18 @@ def like_view(request):
 				LikeModel.objects.create(post_id=post_id, user=user)
 				poster = PostModel.objects.filter(id=post_id).first()
 				subject = "Your photo was liked"
-				message = "Your photo was liked by" + user.username
+				message = "Your photo was liked by " + user.username
 				from_email = EMAIL_HOST_USER
 				to_email = [poster.user.email]
-				send_mail(subject, message, from_email, to_email)
+				send_mail(subject, message, from_email, to_email, fail_silently=True)
 			else:
 				existing_like.delete()
 				poster = PostModel.objects.filter(id=post_id).first()
 				subject = "Your photo was unliked"
-				message = "Your photo was unliked by" + user.username
+				message = "Your photo was unliked by " + user.username
 				from_email = EMAIL_HOST_USER
 				to_email = [poster.user.email]
-				send_mail(subject, message, from_email, to_email)
+				send_mail(subject, message, from_email, to_email, fail_silently=True)
 			return redirect('/feed/')
 	else:
 		return redirect('/login/')
@@ -136,10 +136,10 @@ def comment_view(request):
 			comment.save()
 			poster = PostModel.objects.filter(id=post_id).first()
 			subject = "Comment on your photo"
-			message = str(user.username) + "commented on your photo" + comment_text
+			message = str(user.username) + " commented on your photo " + comment_text
 			from_email = EMAIL_HOST_USER
 			to_email = [poster.user.email]
-			send_mail(subject, message, from_email, to_email)
+			send_mail(subject, message, from_email, to_email, fail_silently=True)
 			return redirect('/feed/')
 		else:
 			return redirect('/feed/')
