@@ -6,10 +6,12 @@
 <title>Post</title>
 </head>
 <body>
+	<div>
 	<form method="POST" enctype="multipart/form-data" id="post_form">
 		{% csrf_token %}
 		{{form}}
-		<input type="submit" class="buttons" value="Add a picture">
+		<input type="submit" class="button" value="Add a picture">
 	</form>
+	</div>
 </body>
 </html>
